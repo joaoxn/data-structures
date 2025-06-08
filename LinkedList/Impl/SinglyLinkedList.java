@@ -1,41 +1,27 @@
 import java.util.ArrayList;
 
-public class SinglyLinkedList {
-    static class Node {
-        int value;
-        Node next;
+@SuppressWarnings("unused")
+public class SinglyLinkedList<T> {
+    private SinglyNode<T> head;
 
-        public Node(int value, Node next) {
-            this.value = value;
-            this.next = next;
-        }
-
-        public Node(int value) {
-            this.value = value;
-        }
-    }
-
-
-    private Node head;
-
-    public int get(int index) {
-        Node current = this.head;
+    public T get(int index) {
+        SinglyNode<T> current = this.head;
         int i = 0;
         while (current != null && i <= index) {
             if (i == index) return current.value;
             i++;
             current = current.next;
         }
-        return -1;
+        return null;
     }
 
-    public void insertHead(int val) {
-        this.head = new Node(val, this.head);
+    public void insertHead(T val) {
+        this.head = new SinglyNode<>(val, this.head);
     }
 
-    public void insertTail(int val) {
-        Node node = new Node(val);
-        Node current = this.head;
+    public void insertTail(T val) {
+        SinglyNode<T> node = new SinglyNode<>(val);
+        SinglyNode<T> current = this.head;
         if (current == null) {
             this.head = node;
             return;
@@ -49,8 +35,8 @@ public class SinglyLinkedList {
     }
 
     public boolean remove(int index) {
-        Node current = this.head;
-        Node prev = null;
+        SinglyNode<T> current = this.head;
+        SinglyNode<T> prev = null;
 
         int i = 0;
         while(current != null && i <= index) {
@@ -73,9 +59,9 @@ public class SinglyLinkedList {
         return false;
     }
 
-    public ArrayList<Integer> getValues() {
-        ArrayList<Integer> array = new ArrayList<>();
-        Node current = this.head;
+    public ArrayList<T> getValues() {
+        ArrayList<T> array = new ArrayList<>();
+        SinglyNode<T> current = this.head;
         while(current != null) {
             array.add(current.value);
             current = current.next;

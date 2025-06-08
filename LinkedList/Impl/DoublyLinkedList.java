@@ -1,42 +1,26 @@
-public class DoublyLinkedList {
-    static class Node {
-        int value;
-        Node prev;
-        Node next;
-
-        public Node(int value, Node prev, Node next) {
-            this.value = value;
-            this.prev = prev;
-            this.next = next;
-        }
-
-        public Node(int value) {
-            this(value, null, null);
-        }
-    }
-
-
-    private Node head;
-    private Node tail;
+@SuppressWarnings("unused")
+public class DoublyLinkedList<T> {
+    private DoublyNode<T> head;
+    private DoublyNode<T> tail;
     private int length;
 
     public DoublyLinkedList() {
         this.length = 0;
     }
 
-    public int get(int index) {
-        Node node = getNode(index);
+    public T get(int index) {
+        DoublyNode<T> node = getNode(index);
         if (node != null) return node.value;
-        return -1;
+        return null;
     }
 
-    private Node getNode(int index) {
-        if (index < length/2) return getNodeFowarding(index);
+    private DoublyNode<T> getNode(int index) {
+        if (index < length/2) return getNodeForwarding(index);
         return getNodeBackwards(index);
     }
 
-    private Node getNodeFowarding(int index) {
-        Node current = this.head;
+    private DoublyNode<T> getNodeForwarding(int index) {
+        DoublyNode<T> current = this.head;
         int i = 0;
         while (current != null && i <= index) {
             if (i == index) return current;
@@ -46,8 +30,8 @@ public class DoublyLinkedList {
         return null;
     }
 
-    private Node getNodeBackwards(int index) {
-        Node current = this.tail;
+    private DoublyNode<T> getNodeBackwards(int index) {
+        DoublyNode<T> current = this.tail;
         int i = length-1;
         while (current != null && i >= index) {
             if (i == index) return current;
@@ -57,8 +41,8 @@ public class DoublyLinkedList {
         return null;
     }
 
-    public void addAtHead(int val) {
-        Node node = new Node(val, null, this.head);
+    public void addAtHead(T val) {
+        DoublyNode<T> node = new DoublyNode<>(val, null, this.head);
         if (this.head != null) this.head.prev = node;
 
         this.head = node;
@@ -66,8 +50,8 @@ public class DoublyLinkedList {
         this.length++;
     }
 
-    public void addAtTail(int val) {
-        Node node = new Node(val, this.tail, null);
+    public void addAtTail(T val) {
+        DoublyNode<T> node = new DoublyNode<>(val, this.tail, null);
         if (this.tail != null) this.tail.next = node;
 
         this.tail = node;
@@ -75,7 +59,7 @@ public class DoublyLinkedList {
         this.length++;
     }
 
-    public void addAtIndex(int index, int val) {
+    public void addAtIndex(int index, T val) {
         if (index == length) {
             this.addAtTail(val);
             return;
@@ -85,10 +69,10 @@ public class DoublyLinkedList {
             return;
         }
 
-        Node nextNode = this.getNode(index);
+        DoublyNode<T> nextNode = this.getNode(index);
         if (nextNode == null) return;
 
-        Node node = new Node(val, nextNode.prev, nextNode);
+        DoublyNode<T> node = new DoublyNode<>(val, nextNode.prev, nextNode);
         if (nextNode.prev != null)
             nextNode.prev.next = node;
         nextNode.prev = node;
@@ -96,7 +80,7 @@ public class DoublyLinkedList {
     }
 
     public void deleteAtIndex(int index) {
-        Node node = this.getNode(index);
+        DoublyNode<T> node = this.getNode(index);
         if (node == null) return;
 
         if (node.prev != null) node.prev.next = node.next;
