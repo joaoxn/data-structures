@@ -91,4 +91,8 @@ public class DoublyLinkedList<T> {
 
         this.length--;
     }
+
+    public int size() {
+        return this.length;
+    }
 }
