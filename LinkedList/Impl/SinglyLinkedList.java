@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class SinglyLinkedList<T> {
     private SinglyNode<T> head;
     private SinglyNode<T> tail;
+    private int length = 0;
 
     public T get(int index) {
         return getNode(index).value;
@@ -26,6 +27,7 @@ public class SinglyLinkedList<T> {
     public void addHead(T obj) {
         this.head = new SinglyNode<>(obj, this.head);
         if (this.tail == null) this.tail = this.head;
+        this.length++;
     }
 
     public void addTail(T obj) {
@@ -34,6 +36,7 @@ public class SinglyLinkedList<T> {
         if (tail != null) tail.next = node;
         if (this.head == null) this.head = node;
         this.tail = node;
+        this.length++;
     }
 
     public void add(int index, T obj) {
@@ -43,15 +46,26 @@ public class SinglyLinkedList<T> {
         }
         SinglyNode<T> prev = getNode(index-1);
         prev.next = new SinglyNode<>(obj, prev.next);
+        this.length++;
     }
 
-    public void remove(int index) {
+    public T remove(int index) {
+        T obj;
         if (index == 0) {
+            obj = this.head.value;
             this.head = this.head.next;
-            return;
+            this.length--;
+            return obj;
         }
         SinglyNode<T> prev = getNode(index-1);
+        obj = prev.next.value;
         prev.next = prev.next.next;
+        this.length--;
+        return obj;
+    }
+
+    public int size() {
+        return this.length;
     }
 
     public ArrayList<T> getValues() {

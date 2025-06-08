@@ -15,7 +15,7 @@ public class DynamicArray<T> {
 
     public T get(int index) {
         if (index < 0 || index >= this.length)
-            throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, this.length));;
+            throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, this.length));
         return this.array[index];
     }
 
