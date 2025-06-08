@@ -6,6 +6,7 @@
 * * Every method has time complexity O(1). (push has O(n) at worst case (stack was full)
 */
 
+@SuppressWarnings("unused")
 public class ArrayStack<T> {
     private final DynamicArray<T> array;
 

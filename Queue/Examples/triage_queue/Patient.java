@@ -14,12 +14,9 @@ public class Patient implements Comparable<Patient> {
         this.dateTime = dateTime;
     }
 
+    @SuppressWarnings("unused")
     public Patient(String name, Urgency priority) {
         this(name, priority, LocalDateTime.now());
-    }
-
-    public Patient(Urgency priority) {
-        this("Unknown", priority);
     }
 
     @Override

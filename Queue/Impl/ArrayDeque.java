@@ -1,3 +1,4 @@
+@SuppressWarnings("unused")
 public class ArrayDeque<T> {
     private final DynamicArray<T> array;
 

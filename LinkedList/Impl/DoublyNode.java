@@ -1,3 +1,4 @@
+@SuppressWarnings("unused")
 public class DoublyNode<T> {
     T value;
     DoublyNode<T> prev;

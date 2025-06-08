@@ -1,6 +1,7 @@
 package triage_queue;
 
 public enum Urgency {
+    @SuppressWarnings("unused")
     IMMEDIATE   (0),
     VERY_URGENT (10, "VERY URGENT"),
     URGENT      (30),
