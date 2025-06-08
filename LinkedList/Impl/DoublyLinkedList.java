@@ -11,6 +11,8 @@
 * * O(n): Only Node objects scaling linearly, thus having n Node instances.
  */
 
+import java.util.ArrayList;
+
 @SuppressWarnings({"unused", "Duplicates"})
 public class DoublyLinkedList<T> {
     private DoublyNode<T> head;
@@ -22,9 +24,7 @@ public class DoublyLinkedList<T> {
     }
 
     public T get(int index) {
-        DoublyNode<T> node = getNode(index);
-        if (node != null) return node.value;
-        return null;
+        return getNode(index).value;
     }
 
     private DoublyNode<T> getNode(int index) {
@@ -45,14 +45,14 @@ public class DoublyLinkedList<T> {
     private DoublyNode<T> getNodeBackwards(int index) {
         DoublyNode<T> current = this.tail;
         int i;
-        for (i = 0; i <= index && current != null; i++) {
+        for (i = size()-1; i >= index && current != null; i--) {
             if (i == index) return current;
             current = current.prev;
         }
         throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, i));
     }
 
-    public void addAtHead(T val) {
+    public void addHead(T val) {
         DoublyNode<T> node = new DoublyNode<>(val, null, this.head);
         if (this.head != null) this.head.prev = node;
 
@@ -61,7 +61,7 @@ public class DoublyLinkedList<T> {
         this.length++;
     }
 
-    public void addAtTail(T val) {
+    public void addTail(T val) {
         DoublyNode<T> node = new DoublyNode<>(val, this.tail, null);
         if (this.tail != null) this.tail.next = node;
 
@@ -70,18 +70,17 @@ public class DoublyLinkedList<T> {
         this.length++;
     }
 
-    public void addAtIndex(int index, T val) {
+    public void add(int index, T val) {
         if (index == length) {
-            this.addAtTail(val);
+            this.addTail(val);
             return;
         }
         if (index == 0) {
-            this.addAtHead(val);
+            this.addHead(val);
             return;
         }
 
         DoublyNode<T> nextNode = this.getNode(index);
-        if (nextNode == null) return;
 
         DoublyNode<T> node = new DoublyNode<>(val, nextNode.prev, nextNode);
         if (nextNode.prev != null)
@@ -90,9 +89,8 @@ public class DoublyLinkedList<T> {
         this.length++;
     }
 
-    public void deleteAtIndex(int index) {
+    public void remove(int index) {
         DoublyNode<T> node = this.getNode(index);
-        if (node == null) return;
 
         if (node.prev != null) node.prev.next = node.next;
         if (node.next != null) node.next.prev = node.prev;
@@ -105,5 +103,15 @@ public class DoublyLinkedList<T> {
 
     public int size() {
         return this.length;
+    }
+
+    public ArrayList<T> getValues() {
+        ArrayList<T> array = new ArrayList<>();
+        DoublyNode<T> current = this.head;
+        while(current != null) {
+            array.add(current.value);
+            current = current.next;
+        }
+        return array;
     }
 }
