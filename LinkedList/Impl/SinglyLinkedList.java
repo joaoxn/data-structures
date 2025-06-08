@@ -1,62 +1,57 @@
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "Duplicates"})
 public class SinglyLinkedList<T> {
     private SinglyNode<T> head;
+    private SinglyNode<T> tail;
 
     public T get(int index) {
+        return getNode(index).value;
+    }
+
+    protected SinglyNode<T> getNode(int index) {
         SinglyNode<T> current = this.head;
-        int i = 0;
-        while (current != null && i <= index) {
-            if (i == index) return current.value;
-            i++;
+        int i;
+        for (i = 0; i <= index && current != null; i++) {
+            if (i == index) return current;
             current = current.next;
         }
-        return null;
+        throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, i));
     }
 
-    public void insertHead(T val) {
-        this.head = new SinglyNode<>(val, this.head);
+    public void set(int index, T value) {
+        getNode(index).value = value;
     }
 
-    public void insertTail(T val) {
-        SinglyNode<T> node = new SinglyNode<>(val);
-        SinglyNode<T> current = this.head;
-        if (current == null) {
-            this.head = node;
+    public void addHead(T obj) {
+        this.head = new SinglyNode<>(obj, this.head);
+        if (this.tail == null) this.tail = this.head;
+    }
+
+    public void addTail(T obj) {
+        SinglyNode<T> node = new SinglyNode<>(obj);
+        SinglyNode<T> tail = this.tail;
+        if (tail != null) tail.next = node;
+        if (this.head == null) this.head = node;
+        this.tail = node;
+    }
+
+    public void add(int index, T obj) {
+        if (index == 0) {
+            addHead(obj);
             return;
         }
-
-        while(current.next != null) {
-            current = current.next;
-        }
-
-        current.next = node;
+        SinglyNode<T> prev = getNode(index-1);
+        prev.next = new SinglyNode<>(obj, prev.next);
     }
 
-    public boolean remove(int index) {
-        SinglyNode<T> current = this.head;
-        SinglyNode<T> prev = null;
-
-        int i = 0;
-        while(current != null && i <= index) {
-            if (i != index) {
-                prev = current;
-                current = current.next;
-                i++;
-                continue;
-            }
-
-            if (i == 0) {
-                this.head = current.next;
-                return true;
-            }
-
-            prev.next = current.next;
-            return true;
+    public void remove(int index) {
+        if (index == 0) {
+            this.head = this.head.next;
+            return;
         }
-
-        return false;
+        SinglyNode<T> prev = getNode(index-1);
+        prev.next = prev.next.next;
     }
 
     public ArrayList<T> getValues() {
@@ -67,5 +62,18 @@ public class SinglyLinkedList<T> {
             current = current.next;
         }
         return array;
+    }
+
+    public void sublist(int start, int end) {
+        if (end <= start) {
+            this.head = null;
+            this.tail = null;
+            return;
+        }
+
+        SinglyNode<T> lastNode = getNode(end-1);
+        lastNode.next = null;
+        this.tail = lastNode;
+        this.head = getNode(start);
     }
 }
