@@ -1,3 +1,5 @@
+package triage_queue;
+
 import java.time.LocalDateTime;
 
 public class Patient implements Comparable<Patient> {
@@ -36,7 +38,7 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public String toString() {
-        return "Patient{" +
+        return "triage_queue.Patient{" +
                 "name='" + name + '\'' +
                 ", priority=" + priority +
                 ", dateTime=" + dateTime +

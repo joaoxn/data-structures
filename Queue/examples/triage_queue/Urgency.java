@@ -1,3 +1,5 @@
+package triage_queue;
+
 public enum Urgency {
     IMMEDIATE   (0),
     VERY_URGENT (10, "VERY URGENT"),

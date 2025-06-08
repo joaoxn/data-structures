@@ -1,5 +1,9 @@
+package triage_queue;
+
 import java.time.LocalDateTime;
 import java.util.PriorityQueue;
+
+// *Example using: PriorityQueue.
 
 public class Main {
     public static void main(String[] args) {
