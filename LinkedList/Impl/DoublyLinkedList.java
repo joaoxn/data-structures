@@ -1,4 +1,17 @@
-@SuppressWarnings("unused")
+/*
+* * Time complexity:
+
+* * get(index): O(n) - Best: O(1); Worst: O(n/2) - Traverse the list. The worst case is the index in the middle of the list.
+* * addAtHead(val): O(1) - Directly insert at beginning.
+* * addAtTail(val): O(1) - Directly insert at the end.
+* * addAtIndex(index, val): O(n) - Best: O(1); Worst: O(n/2) - Traverse using getNode method.
+* * deleteAtIndex(index): O(n) - Best: O(1); Worst: O(n/2) - Traverse using getNode method.
+
+* * Space complexity:
+* * O(n): Only Node objects scaling linearly, thus having n Node instances.
+ */
+
+@SuppressWarnings({"unused", "Duplicates"})
 public class DoublyLinkedList<T> {
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
@@ -21,24 +34,22 @@ public class DoublyLinkedList<T> {
 
     private DoublyNode<T> getNodeForwarding(int index) {
         DoublyNode<T> current = this.head;
-        int i = 0;
-        while (current != null && i <= index) {
+        int i;
+        for (i = 0; i <= index && current != null; i++) {
             if (i == index) return current;
-            i++;
             current = current.next;
         }
-        return null;
+        throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, i));
     }
 
     private DoublyNode<T> getNodeBackwards(int index) {
         DoublyNode<T> current = this.tail;
-        int i = length-1;
-        while (current != null && i >= index) {
+        int i;
+        for (i = 0; i <= index && current != null; i++) {
             if (i == index) return current;
-            i--;
             current = current.prev;
         }
-        return null;
+        throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, i));
     }
 
     public void addAtHead(T val) {

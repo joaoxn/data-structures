@@ -14,7 +14,8 @@ public class DynamicArray<T> {
     }
 
     public T get(int index) {
-        if (index < 0 || index >= length) throw new IndexOutOfBoundsException();
+        if (index < 0 || index >= this.length)
+            throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, this.length));;
         return this.array[index];
     }
 
@@ -24,7 +25,8 @@ public class DynamicArray<T> {
     }
 
     public void set(int index, T obj) {
-        if  (index < 0 || index > this.length) throw new IndexOutOfBoundsException();
+        if  (index < 0 || index > this.length)
+            throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, this.length));
         if (index == this.length) {
             add(obj);
             return;
@@ -44,7 +46,8 @@ public class DynamicArray<T> {
             add(obj);
             return;
         }
-        if (index < 0 || index > this.size()) throw new IndexOutOfBoundsException();
+        if (index < 0 || index > this.size())
+            throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, this.size()));
 
         for (int i = this.size()-1; i >= index; i--) {
             this.set(i+1, this.get(i));
