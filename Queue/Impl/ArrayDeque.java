@@ -1,5 +1,5 @@
 @SuppressWarnings("unused")
-public class ArrayDeque<T> {
+public class ArrayDeque<T> extends Deque<T> {
     private final DynamicArray<T> array;
 
 
@@ -11,12 +11,12 @@ public class ArrayDeque<T> {
         array = new DynamicArray<>();
     }
 
-    public void addFirst(T o) {
-        array.add(0, o);
+    public void addFirst(T value) {
+        array.add(0, value);
     }
 
-    public void addLast(T o) {
-        array.add(o);
+    public void addLast(T value) {
+        array.add(value);
     }
 
     public T removeFirst() {
@@ -33,5 +33,13 @@ public class ArrayDeque<T> {
 
     public T getLast() {
         return array.at(-1);
+    }
+
+    public int size() {
+        return array.size();
+    }
+
+    public boolean isEmpty() {
+        return array.isEmpty();
     }
 }

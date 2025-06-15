@@ -9,8 +9,8 @@ public class LinkedStack<T> {
     SinglyLinkedList<T> list = new SinglyLinkedList<>();
 
 
-    public void add(T obj) {
-        list.addHead(obj);
+    public void add(T value) {
+        list.addHead(value);
     }
 
     public T element() {

@@ -14,7 +14,7 @@
 import java.util.ArrayList;
 
 @SuppressWarnings({"unused", "Duplicates"})
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> extends LinkedList<T> {
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
     private int length;
@@ -50,6 +50,10 @@ public class DoublyLinkedList<T> {
             current = current.prev;
         }
         throw new IndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(index, i));
+    }
+
+    public void set(int index, T value) {
+        getNode(index).value = value;
     }
 
     public void addHead(T val) {
@@ -89,7 +93,7 @@ public class DoublyLinkedList<T> {
         this.length++;
     }
 
-    public void remove(int index) {
+    public T remove(int index) {
         DoublyNode<T> node = this.getNode(index);
 
         if (node.prev != null) node.prev.next = node.next;
@@ -99,6 +103,14 @@ public class DoublyLinkedList<T> {
         if (node == this.tail) this.tail = node.prev;
 
         this.length--;
+        return node.value;
+    }
+
+    @Override
+    public void clear() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
     }
 
     public int size() {

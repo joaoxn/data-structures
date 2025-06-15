@@ -7,7 +7,7 @@
 */
 
 @SuppressWarnings("unused")
-public class ArrayStack<T> {
+public class ArrayStack<T> implements Stack<T> {
     private final DynamicArray<T> array;
 
     ArrayStack(int capacity) {
@@ -18,19 +18,38 @@ public class ArrayStack<T> {
         array = new DynamicArray<>();
     }
 
-    public void push(T obj) {
-        array.add(obj);
+    @Override
+    public void push(T value) {
+        array.add(value);
     }
 
+    @Override
     public T pop() {
         return array.pop();
     }
 
+    @Override
     public T peek() {
         return array.at(-1);
     }
 
+    @Override
     public boolean isEmpty() {
         return array.size() <= 0;
+    }
+
+    @Override
+    public int size() {
+        return array.size();
+    }
+
+    @Override
+    public void clear() {
+        throw new Error("Not yet implemented");
+    }
+
+    @Override
+    public T[] toArray() {
+        throw new Error("Not yet implemented");
     }
 }

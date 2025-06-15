@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 @SuppressWarnings({"unused", "Duplicates"})
-public class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> extends LinkedList<T> {
     private SinglyNode<T> head;
     private SinglyNode<T> tail;
     private int length = 0;
@@ -24,14 +24,14 @@ public class SinglyLinkedList<T> {
         getNode(index).value = value;
     }
 
-    public void addHead(T obj) {
-        this.head = new SinglyNode<>(obj, this.head);
+    public void addHead(T value) {
+        this.head = new SinglyNode<>(value, this.head);
         if (this.tail == null) this.tail = this.head;
         this.length++;
     }
 
-    public void addTail(T obj) {
-        SinglyNode<T> node = new SinglyNode<>(obj);
+    public void addTail(T value) {
+        SinglyNode<T> node = new SinglyNode<>(value);
         SinglyNode<T> tail = this.tail;
         if (tail != null) tail.next = node;
         if (this.head == null) this.head = node;
@@ -39,29 +39,36 @@ public class SinglyLinkedList<T> {
         this.length++;
     }
 
-    public void add(int index, T obj) {
+    public void add(int index, T value) {
         if (index == 0) {
-            addHead(obj);
+            addHead(value);
             return;
         }
         SinglyNode<T> prev = getNode(index-1);
-        prev.next = new SinglyNode<>(obj, prev.next);
+        prev.next = new SinglyNode<>(value, prev.next);
         this.length++;
     }
 
     public T remove(int index) {
-        T obj;
+        T value;
         if (index == 0) {
-            obj = this.head.value;
+            value = this.head.value;
             this.head = this.head.next;
             this.length--;
-            return obj;
+            return value;
         }
         SinglyNode<T> prev = getNode(index-1);
-        obj = prev.next.value;
+        value = prev.next.value;
         prev.next = prev.next.next;
         this.length--;
-        return obj;
+        return value;
+    }
+
+    @Override
+    public void clear() {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
     }
 
     public int size() {
