@@ -39,4 +39,20 @@ public class QueueStack<T> implements Stack<T> {
     public T[] toArray() {
         return queue.toArray();
     }
+
+    @Override
+    public String toString() {
+        String str = queue.toString();
+        str = str.substring(1, str.length()-1);
+        String[] split = str.split(", ");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = split.length-1; i >= 0; i--) {
+            sb.append(split[i]);
+            if (i > 0) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
