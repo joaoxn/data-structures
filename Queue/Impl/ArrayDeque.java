@@ -42,4 +42,13 @@ public class ArrayDeque<T> extends Deque<T> {
     public boolean isEmpty() {
         return array.isEmpty();
     }
+
+    public void clear() {
+        array.clear();
+    }
+
+    @Override
+    public T[] toArray() {
+        return array.toArray();
+    }
 }

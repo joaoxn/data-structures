@@ -25,4 +25,18 @@ public class LinkedQueue<T> implements Queue<T> {
     public boolean isEmpty() {
         return list.isEmpty();
     }
+
+    @Override
+    public void clear() {
+        list.clear();
+    }
+
+    public T[] toArray() {
+        return list.toArray();
+    }
+
+    @Override
+    public String toString() {
+        return list.toString();
+    }
 }

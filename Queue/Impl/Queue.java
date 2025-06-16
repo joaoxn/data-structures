@@ -4,4 +4,6 @@ public interface Queue<T> {
     T peek();
     int size();
     boolean isEmpty();
+    void clear();
+    T[] toArray();
 }
